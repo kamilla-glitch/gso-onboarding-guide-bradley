@@ -1,0 +1,57 @@
+# macOS
+.DS_Store
+.Trash/
+.CFUserTextEncoding
+
+# Shell / config
+.zsh_history
+.zsh_sessions/
+.zshrc
+.zprofile
+.gitconfig
+
+# App data / caches
+.cache/
+.config/
+.local/
+.aws/
+.sq/
+.bundle/
+.blockinfo
+.mcp-auth/
+.peekaboo/
+.claude/
+.claude.json
+.datahub/
+AppData/
+Library/
+Applications/
+Movies/
+Music/
+Pictures/
+Public/
+bin/
+~/
+
+# Other project files (not part of this repo)
+*.py
+*.yaml
+*.txt
+*.docx
+*.html.bak
+
+# Exclude all markdown EXCEPT README
+*.md
+!README.md
+GSO_Automation/
+gso-reporting/
+gso-onboarding-guide/
+bradley_curtis_onboarding_site/
+bradley_curtis_website_session_prompt*
+square-3p-vendor-guide/
+square-franchises/
+square-gso-packages/
+Kamilla-Warr/
+Desktop/
+Documents/
+Downloads/

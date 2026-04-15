@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GSO Onboarding Guide — Onboarding Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ─────────────────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── Design Tokens ──────────────────────────────────────────────────────── */
+    :root {
+      --sq-black:     #0a0a0a;
+      --sq-dark:      #1a1a1a;
+      --sq-mid:       #4a4a4a;
+      --sq-muted:     #767676;
+      --sq-border:    #e8e8e8;
+      --sq-bg:        #f5f5f5;
+      --sq-white:     #ffffff;
+      --sq-green:     #00CC65;
+      --sq-green-d:   #009e4f;
+      --sq-green-lt:  #e6f9f0;
+      --sq-teal:      #00b4a0;
+      --sq-blue:      #006aff;
+      --sq-blue-lt:   #eaf0ff;
+      --sq-yellow:    #F6A623;
+      --sq-yellow-lt: #fff8ec;
+      --sq-purple:    #7c3aed;
+      --sq-purple-lt: #f3f0ff;
+    }
+
+    /* ── Base ───────────────────────────────────────────────────────────────── */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--sq-bg);
+      color: var(--sq-dark);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ── Top Bar ────────────────────────────────────────────────────────────── */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--sq-black);
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      gap: 14px;
+      z-index: 100;
+    }
+
+    /* Logo link */
+    .sq-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    /* Logo mark — green square with grid icon */
+    .sq-logo-mark {
+      width: 30px;
+      height: 30px;
+      background: var(--sq-green);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Wordmark */
+    .topbar-wordmark {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    /* Divider */
+    .topbar-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
+    }
+
+    /* Sub-label */
+    .topbar-sub {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Right cluster */
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #progress-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+      white-space: nowrap;
+    }
+
+    .progress-track {
+      width: 110px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--sq-green);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* ── Week Tab Bar ───────────────────────────────────────────────────────── */
+    .weekbar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      height: 46px;
+      background: var(--sq-white);
+      border-bottom: 1px solid var(--sq-border);
+      display: flex;
+      align-items: stretch;
+      z-index: 99;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .weekbar::-webkit-scrollbar { display: none; }
+
+    .weekbar-tab {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 0 22px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--sq-muted);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid transparent;
+      transition: all 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .weekbar-tab:hover {
+      color: var(--sq-dark);
+      background: var(--sq-bg);
+    }
+
+    /* Active bottom-border colours per tab class */
+    .weekbar-tab.t0.active { border-bottom-color: var(--sq-green); }
+    .weekbar-tab.t1.active { border-bottom-color: #00CC65; }
+    .weekbar-tab.t2.active { border-bottom-color: #7c3aed; }
+    .weekbar-tab.t3.active { border-bottom-color: #00b4a0; }
+    .weekbar-tab.t4.active { border-bottom-color: #F6A623; }
+    .weekbar-tab.t6.active { border-bottom-color: #e11d48; }
+
+    .weekbar-tab.active { color: var(--sq-black); }
+
+    .wb-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .wb-done-tick {
+      width: 13px;
+      height: 13px;
+      color: var(--sq-green);
+      display: none;
+      flex-shrink: 0;
+    }
+    .weekbar-tab.week-done .wb-done-tick { display: block; }
+    .weekbar-tab.week-done .wb-dot       { display: none; }
+
+    .weekbar-divider {
+      width: 1px;
+      background: var(--sq-border);
+      margin: 10px 0;
+      flex-shrink: 0;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────────────────── */
+    .layout {
+      display: flex;
+      position: fixed;
+      top: 106px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    /* ── Sidebar ────────────────────────────────────────────────────────────── */
+    .sidebar {
+      width: 248px;
+      flex-shrink: 0;
+      height: 100%;
+      overflow-y: auto;
+      background: var(--sq-white);
+      border-right: 1px solid var(--sq-border);
+      padding: 24px 0 60px;
+    }
+
+    .sidebar-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sq-muted);
+      padding: 0 20px;
+      margin-top: 24px;
+      margin-bottom: 5px;
+    }
+
+    .sidebar-sub-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 20px 5px 34px;
+      font-size: 12px;
+      color: var(--sq-muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.12s;
+    }
+    .sidebar-sub-link:hover { color: var(--sq-dark); }
+    .sidebar-sub-link.active {
+      color: var(--sq-green-d);
+      font-weight: 600;
+    }
+
+    .sb-group { display: none; }
+    .sb-group.group-active { display: block; }
+
+    /* ── Main Content ───────────────────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      height: 100%;
+      padding: 48px max(60px, calc(50% - 420px)) 80px;
+    }
+
+    .week-section          { display: none; }
+    .week-section.panel-active { display: block; }
+
+    /* ── Section Structure ──────────────────────────────────────────────────── */
+    .week-section {
+      scroll-margin-top: 130px;
+      margin-bottom: 72px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1.5px solid var(--sq-border);
+    }
+
+    .week-num-block {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    .week-num-block.w1 { background: #00CC65; }
+    .week-num-block.w2 { background: #7c3aed; }
+    .week-num-block.w3 { background: #00b4a0; }
+    .week-num-block.w4 { background: #F6A623; }
+    .week-num-block.w6 { background: #e11d48; }
+
+    .section-header-text h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--sq-black);
+      letter-spacing: -0.4px;
+      margin-bottom: 4px;
+    }
+    .section-header-text p {
+      font-size: 13.5px;
+      color: var(--sq-muted);
+    }
+
+    /* ── Block Labels ───────────────────────────────────────────────────────── */
+    .block-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sq-muted);
+      margin: 32px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      scroll-margin-top: 130px;
+    }
+    .block-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--sq-border);
+    }
+
+    /* ── Cards ──────────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--sq-white);
+      border: 1.5px solid var(--sq-border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 12px;
+    }
+    .card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--sq-black);
+      margin-bottom: 7px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--sq-mid);
+      line-height: 1.65;
+    }
+    .card p + p { margin-top: 8px; }
+    .card ul {
+      padding-left: 16px;
+      margin-top: 7px;
+    }
+    .card ul li {
+      font-size: 14px;
+      color: var(--sq-mid);
+      margin-bottom: 5px;
+      line-height: 1.55;
+    }
+    .card ul li strong {
+      color: var(--sq-dark);
+      font-weight: 600;
+    }
+    .card-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ── Intro Callout ──────────────────────────────────────────────────────── */
+    .intro-callout {
+      background: var(--sq-black);
+      color: white;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .intro-callout p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+    }
+    .intro-callout p + p { margin-top: 12px; }
+    .intro-callout a {
+      color: var(--sq-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ── Callout Boxes ──────────────────────────────────────────────────────── */
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    .callout.green {
+      background: var(--sq-green-lt);
+      border-left: 3px solid var(--sq-green);
+      color: #095c2e;
+    }
+    .callout.blue {
+      background: var(--sq-blue-lt);
+      border-left: 3px solid var(--sq-blue);
+      color: #003d99;
+    }
+    .callout.yellow {
+      background: var(--sq-yellow-lt);
+      border-left: 3px solid var(--sq-yellow);
+      color: #7a4f00;
+    }
+    .callout-icon {
+      flex-shrink: 0;
+      font-size: 15px;
+      margin-top: 1px;
+    }
+    .callout a {
+      color: inherit;
+      font-weight: 600;
+    }
+
+    /* ── Chips ──────────────────────────────────────────────────────────────── */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--sq-dark);
+      background: var(--sq-bg);
+      border: 1.5px solid var(--sq-border);
+      padding: 5px 12px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: all 0.12s;
+    }
+    .chip:hover {
+      background: var(--sq-black);
+      color: white;
+      border-color: var(--sq-black);
+    }
+    .chip.green {
+      background: var(--sq-green-lt);
+      border-color: #b3edce;
+      color: var(--sq-green-d);
+    }
+    .chip.green:hover {
+      background: var(--sq-green-d);
+      color: white;
+    }
+
+    /* ── Slack Channel Tags ─────────────────────────────────────────────────── */
+    .channel-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .channel-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      font-family: 'SF Mono', 'Fira Mono', monospace;
+      color: var(--sq-dark);
+      background: var(--sq-bg);
+      border: 1.5px solid var(--sq-border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: all 0.12s;
+    }
+    .channel-tag span {
+      color: var(--sq-muted);
+      font-weight: 400;
+    }
+
+    /* ── Tool Cards ─────────────────────────────────────────────────────────── */
+    .tool-card {
+      background: var(--sq-white);
+      border: 1.5px solid var(--sq-border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .tool-card-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--sq-border);
+      background: var(--sq-bg);
+    }
+    .tool-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .tool-card-head h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--sq-black);
+    }
+    .tool-card-head .tool-go {
+      margin-left: auto;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--sq-green-d);
+      background: var(--sq-green-lt);
+      border: 1px solid #b3edce;
+      padding: 3px 10px;
+      border-radius: 99px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .tool-card-head .tool-go:hover {
+      background: var(--sq-green-d);
+      color: white;
+    }
+    .tool-card-body {
+      padding: 16px 20px;
+    }
+    .tool-card-body p,
+    .tool-card-body ul,
+    .tool-card-body li {
+      font-size: 13.5px;
+      color: var(--sq-mid);
+      line-height: 1.65;
+    }
+    .tool-card-body ul { padding-left: 16px; margin-top: 7px; }
+    .tool-card-body li { margin-bottom: 5px; }
+    .tool-card-body a {
+      color: var(--sq-blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* ── Dashboard List ─────────────────────────────────────────────────────── */
+    .dashboard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .dashboard-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--sq-bg);
+      border: 1px solid var(--sq-border);
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 13px;
+      color: var(--sq-dark);
+      font-weight: 500;
+      transition: all 0.12s;
+    }
+    .dashboard-item:hover {
+      background: var(--sq-black);
+      color: white;
+      border-color: var(--sq-black);
+    }
+    .dashboard-item .di-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── Overview Panel ─────────────────────────────────────────────────────── */
+    .hero { margin-bottom: 60px; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--sq-green-d);
+      background: var(--sq-green-lt);
+      border: 1px solid #b3edce;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--sq-black);
+      letter-spacing: -1px;
+      line-height: 1.18;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 span { color: var(--sq-green-d); }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--sq-mid);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .timeline-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1.5px solid var(--sq-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--sq-white);
+    }
+
+    .tl-cell {
+      padding: 16px 12px 14px;
+      border-right: 1px solid var(--sq-border);
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .tl-cell:last-child { border-right: none; }
+    .tl-cell:hover { background: var(--sq-bg); }
+
+    .tl-num {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--sq-black);
+      letter-spacing: -0.5px;
+      margin-bottom: 2px;
+    }
+
+    .tl-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--sq-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .tl-bar {
+      height: 3px;
+      border-radius: 2px;
+      margin: 10px auto 0;
+      width: 32px;
+    }
+    .tl1 .tl-bar { background: #00CC65; }
+    .tl2 .tl-bar { background: #7c3aed; }
+    .tl3 .tl-bar { background: #00b4a0; }
+    .tl4 .tl-bar { background: #F6A623; }
+    .tl5 .tl-bar { background: #006aff; }
+
+    /* How-to section label */
+    .section-label-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--sq-muted);
+      margin-bottom: 16px;
+    }
+    .section-label-row::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--sq-border);
+    }
+
+    /* Info cards grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .info-card {
+      background: var(--sq-white);
+      border: 1.5px solid var(--sq-border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .info-card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .info-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sq-black);
+      margin-bottom: 4px;
+    }
+
+    .info-card-desc {
+      font-size: 12.5px;
+      color: var(--sq-mid);
+      line-height: 1.6;
+    }
+
+    /* Tip banner */
+    .tip-banner {
+      background: var(--sq-black);
+      border-radius: 10px;
+      padding: 18px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+
+    .tip-banner-emoji { font-size: 22px; flex-shrink: 0; }
+
+    .tip-banner-text {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── Week Tab Bar ──────────────────────────────────────────────────────── -->
+  <nav class="weekbar">
+
+    <!-- Overview tab (no data-week) -->
+    <a href="#" class="weekbar-tab t0 active">
+      <span class="wb-dot" style="background:#e0e0e0;"></span>
+      <svg class="wb-done-tick" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>
+      </svg>
+      Overview
+    </a>
+
+    <div class="weekbar-divider"></div>
+
+    <!-- W1 -->
+    <a href="#" class="weekbar-tab t1" data-week="1">
+      <span class="wb-dot" style="background:#00CC65;"></span>
+      <svg class="wb-done-tick" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>
+      </svg>
+      W1 — GSO &amp; Square
+    </a>
+
+    <!-- W2 -->
+    <a href="#" class="weekbar-tab t2" data-week="2">
+      <span class="wb-dot" style="background:#7c3aed;"></span>
+      <svg class="wb-done-tick" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>
+      </svg>
+      W2 — Partners
+    </a>
+
+    <!-- W3 -->
+    <a href="#" class="weekbar-tab t3" data-week="3">
+      <span class="wb-dot" style="background:#00b4a0;"></span>
+      <svg class="wb-done-tick" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>
+      </svg>
+      W3 — Bootcamp
+    </a>
+
+    <!-- W4 -->
+    <a href="#" class="weekbar-tab t4" data-week="4">
+      <span class="wb-dot" style="background:#F6A623;"></span>
+      <svg class="wb-done-tick" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>
+      </svg>
+      W4/5 — Post Bootcamp
+    </a>
+
+    <!-- W6 -->
+    <a href="#" class="weekbar-tab t6" data-week="6">
+      <span class="wb-dot" style="background:#e11d48;"></span>
+      <svg class="wb-done-tick" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/>
+      </svg>
+      W6–10 — Premium DSRs
+    </a>
+
+  </nav>
+
+  <!-- ── Layout ─────────────────────────────────────────────────────────────── -->
+  <div class="layout">
+
+    <!-- ── Sidebar ──────────────────────────────────────────────────────────── -->
+    <nav class="sidebar">
+
+      <!-- Overview group (visible by default) -->
+      <div class="sb-group group-active" data-for="overview">
+        <div class="sidebar-group-label">Welcome</div>
+        <p style="font-size:12px;color:var(--sq-muted);padding:6px 20px 0 20px;line-height:1.6;">
+          Bradley's 5-week onboarding guide. Select a week tab above to get started.
+        </p>
+      </div>
+
+      <!-- Week 1 group -->
+      <div class="sb-group" data-for="week1">
+        <div class="sidebar-group-label">Week 1 — GSO &amp; Square</div>
+        <a href="#w1-playbook"         class="sidebar-sub-link">GSO Playbook</a>
+        <a href="#w1-comms"            class="sidebar-sub-link">Comms &amp; Channels</a>
+        <a href="#w1-meetings"         class="sidebar-sub-link">Recurring Meetings</a>
+        <a href="#w1-team"             class="sidebar-sub-link">Meet the Team</a>
+        <a href="#w1-tooling"          class="sidebar-sub-link">Tooling Setup</a>
+        <a href="#week1-checkpoint"    class="sidebar-sub-link">✓ Week 1 Checkpoint</a>
+
+        <div class="sidebar-group-label">Quick Access</div>
+        <a href="go/gsoplaybook"  class="sidebar-sub-link" target="_blank">go/gsoplaybook ↗</a>
+        <a href="go/salesforce"   class="sidebar-sub-link" target="_blank">go/salesforce ↗</a>
+        <a href="go/looker"       class="sidebar-sub-link" target="_blank">go/looker ↗</a>
+        <a href="go/chatgpt"      class="sidebar-sub-link" target="_blank">go/chatgpt ↗</a>
+        <a href="go/getgoose"     class="sidebar-sub-link" target="_blank">go/getgoose ↗</a>
+      </div>
+
+      <!-- Week 2 group -->
+      <div class="sb-group" data-for="week2">
+        <div class="sidebar-group-label">Week 2 — Cross-Functional Partners</div>
+        <a href="#w2-stakeholders"  class="sidebar-sub-link">Stakeholder Map</a>
+        <a href="#w2-bpo"           class="sidebar-sub-link">BPO Partners</a>
+        <a href="#w2-3p"            class="sidebar-sub-link">3P Relationships</a>
+        <a href="#w2-samps"         class="sidebar-sub-link">SAMPs</a>
+        <a href="#w2-sam"           class="sidebar-sub-link">SAM Overview</a>
+        <a href="#week2-checkpoint" class="sidebar-sub-link">✓ Week 2 Checkpoint</a>
+      </div>
+
+      <!-- Week 3 group -->
+      <div class="sb-group" data-for="week3">
+        <div class="sidebar-group-label">Week 3 — Bootcamp</div>
+        <a href="#w3-agenda"        class="sidebar-sub-link">Bootcamp Agenda</a>
+        <a href="#week3-checkpoint" class="sidebar-sub-link">✓ Week 3 Checkpoint</a>
+      </div>
+
+      <!-- Week 4 group -->
+      <div class="sb-group" data-for="week4">
+        <div class="sidebar-group-label">Week 4 — Products</div>
+        <a href="#w4-products"      class="sidebar-sub-link">Product Overview</a>
+        <a href="#w4-restaurants"   class="sidebar-sub-link">Restaurants</a>
+        <a href="#w4-retail"        class="sidebar-sub-link">Retail</a>
+        <a href="#w4-services"      class="sidebar-sub-link">Services</a>
+        <a href="#w4-ecommerce"     class="sidebar-sub-link">Ecommerce</a>
+        <a href="#w4-staff"         class="sidebar-sub-link">Staff Management</a>
+        <a href="#w4-engagement"    class="sidebar-sub-link">Customer Engagement</a>
+        <a href="#w4-feedback"      class="sidebar-sub-link">Feedback &amp; Review</a>
+        <a href="#week4-checkpoint" class="sidebar-sub-link">✓ Week 4 Checkpoint</a>
+      </div>
+
+      <!-- Week 6 group -->
+      <div class="sb-group" data-for="week6">
+        <div class="sidebar-group-label">Weeks 6–10 — Premium DSRs</div>
+        <a href="#w6-intro"         class="sidebar-sub-link">Introduction</a>
+        <a href="#w6-workflow"      class="sidebar-sub-link">Workflow</a>
+        <a href="#week6-checkpoint" class="sidebar-sub-link">✓ Week 6 Checkpoint</a>
+      </div>
+
+    </nav><!-- /.sidebar -->
+
+    <!-- ── Main Content ──────────────────────────────────────────────────────── -->
+    <main class="main">
+
+      <section id="overview" class="week-section panel-active">
+
+        <!-- Hero -->
+        <div class="hero">
+          <div class="hero-eyebrow">🎉 Starting 20 April 2026</div>
+          <h1>Hi Bradley, Welcome to the<br><span>APAC Global Seller Onboarding Team</span></h1>
+          <p class="hero-desc">Your 5-week roadmap to becoming a confident Onboarding Specialist at Square. Work through each section, check off milestones, and track your progress as you go.</p>
+
+          <!-- Timeline strip -->
+          <div class="timeline-strip">
+            <div class="tl-cell tl1" onclick="activatePanel('week1')">
+              <span class="tl-num">1</span>
+              <span class="tl-label">Welcome</span>
+              <div class="tl-bar"></div>
+            </div>
+            <div class="tl-cell tl2" onclick="activatePanel('week2')">
+              <span class="tl-num">2</span>
+              <span class="tl-label">Processes</span>
+              <div class="tl-bar"></div>
+            </div>
+            <div class="tl-cell tl3" onclick="activatePanel('week3')">
+              <span class="tl-num">3</span>
+              <span class="tl-label">Products</span>
+              <div class="tl-bar"></div>
+            </div>
+            <div class="tl-cell tl4" onclick="activatePanel('week4')">
+              <span class="tl-num">4</span>
+              <span class="tl-label">Partners</span>
+              <div class="tl-bar"></div>
+            </div>
+            <div class="tl-cell tl5" onclick="activatePanel('week6')">
+              <span class="tl-num">5</span>
+              <span class="tl-label">Escalations</span>
+              <div class="tl-bar"></div>
+            </div>
+          </div>
+        </div><!-- /.hero -->
+
+        <!-- How to use this guide -->
+        <div style="margin-top:40px;">
+          <div class="section-label-row">How to use this guide</div>
+
+          <div class="info-grid">
+            <!-- Card 1 -->
+            <div class="info-card">
+              <div class="info-card-icon" style="background:#0a0a0a;">📑</div>
+              <div>
+                <div class="info-card-title">Week tabs at the top</div>
+                <div class="info-card-desc">Use the week tabs in the grey bar below the Square logo to jump between weeks. Each week lives in its own panel — click a tab to load that week's content.</div>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="info-card">
+              <div class="info-card-icon" style="background:#eaf0ff;">🗂️</div>
+              <div>
+                <div class="info-card-title">Sidebar navigation</div>
+                <div class="info-card-desc">The left sidebar updates when you switch weeks, showing quick-jump links to each section within that week. Click any link to scroll directly to that topic.</div>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="info-card">
+              <div class="info-card-icon" style="background:var(--sq-green-lt);">✅</div>
+              <div>
+                <div class="info-card-title">Tick off your milestones</div>
+                <div class="info-card-desc">Each week has an end-of-week checkpoint. Click any row to mark it done — your progress is saved automatically in your browser and will still be there next time you open the guide.</div>
+              </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="info-card">
+              <div class="info-card-icon" style="background:var(--sq-yellow-lt);">🔗</div>
+              <div>
+                <div class="info-card-title">Links open in new tabs</div>
+                <div class="info-card-desc">All resource links — go/ shortcuts, Looker dashboards, training docs, and Slack channels — open in a new browser tab so you never lose your place in the guide.</div>
+              </div>
+            </div>
+          </div><!-- /.info-grid -->
+
+          <!-- Tip banner -->
+          <div class="tip-banner">
+            <span class="tip-banner-emoji">💡</span>
+            <p class="tip-banner-text">Tip: Start with <strong style="color:#00CC65;">Week 1</strong> and work through it day by day. Your Sidekick <strong style="color:#00CC65;">Kristian Bojsen-Moller</strong> is your first port of call for any questions — reach out to him on Slack anytime.</p>
+          </div>
+
+        </div><!-- /how-to -->
+
+      </section><!-- /#overview -->
+      <section id="week1" class="week-section w1">
+
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="week-num-block w1">W1</div>
+          <div class="section-header-text">
+            <h2>Welcome to GSO &amp; New to Square</h2>
+            <p>Setup, systems access, team orientation &amp; tools</p>
+          </div>
+        </div>
+
+        <!-- Intro Callout -->
+        <div class="intro-callout">
+          <p>Please spend your first week at Square getting set up with your new laptop, gaining access to all required systems, and familiarising yourself with Square and Block as a business. At the same time, please spend time familiarising yourself with the GSO team mission, structure, goals, and resources. Get to know the basics of being a new employee at Square, as a GSO rep, and get to know your team and your Sidekick, <strong style="color:#00CC65;">Kristian Bojsen-Moller</strong>.</p>
+          <p>Your Sidekick is your go-to person for questions, guidance, and support as you find your feet. Kristian is there to help you navigate the team, the tools, and the day-to-day — don't hesitate to lean on him early and often.</p>
+          <p>Throughout your onboarding guide we will refer you to the <a href="http://go/gsoplaybook" target="_blank">GSO Playbook (go/gsoplaybook)</a> — this is your source of truth for anything you need to know as a new Onboarding Specialist. Please bookmark this for future reference. It will be updated continuously.</p>
+        </div>
+
+        <!-- ── GSO Playbook ──────────────────────────────────────────────── -->
+        <div id="w1-playbook" class="block-label">Global Seller Onboarding Playbook</div>
+
+        <div class="callout blue">
+          <span class="callout-icon">📖</span>
+          <span>Please read through the following sections in the <a href="http://go/gsoplaybook" target="_blank">Global Seller Onboarding Playbook</a> during Week 1.</span>
+        </div>
+
+        <div class="card">
+          <h4>Playbook Sections — Week 1 Reading</h4>
+          <div class="chip-row">
+            <a href="http://go/gsoplaybook" target="_blank" class="chip green">🎉 Welcome to GSO!</a>
+            <a href="http://go/gsoplaybook" target="_blank" class="chip green">💬 Team Communication Channels</a>
+            <a href="http://go/gsoplaybook" target="_blank" class="chip green">📈 Metrics, Performance &amp; Career Growth</a>
+          </div>
+        </div>
+
+        <!-- ── Comms & Channels ──────────────────────────────────────────── -->
+        <div id="w1-comms" class="block-label">Team Communication Channels</div>
+
+        <div class="callout yellow">
+          <span class="callout-icon">⚠️</span>
+          <span>Some channels may be locked and require an invite. If you can't join a channel, contact <strong>Kamilla Schou Warr</strong> on Slack and she'll get you added.</span>
+        </div>
+
+        <!-- Emails / Google Groups -->
+        <div class="card">
+          <h4>Emails / Google Groups</h4>
+          <ul>
+            <li><strong>global-onboarding@squareup.com</strong> — Team group email for all GSO members</li>
+            <li><strong>apac-gso</strong> — Market-specific group for AU &amp; Japan</li>
+          </ul>
+        </div>
+
+        <!-- APAC GSO Slack Channels -->
+        <div class="card">
+          <h4>APAC GSO Slack Channels</h4>
+          <p style="font-size:13px;color:var(--sq-muted);margin-bottom:12px;">Leave any channels that aren't creating value for you at the end of month 1.</p>
+          <div class="channel-tags">
+            <span class="channel-tag">#au-samps-gso</span>
+            <span class="channel-tag">#au-growth-product-updates</span>
+            <span class="channel-tag">#au-partners</span>
+            <span class="channel-tag">#au-gso-samps-pmm</span>
+            <span class="channel-tag">#au-rst-pss-gso</span>
+            <span class="channel-tag">#au-samps</span>
+            <span class="channel-tag">#au-sales-sps-am</span>
+            <span class="channel-tag">#australian_sellers</span>
+            <span class="channel-tag">#au-squares</span>
+          </div>
+        </div>
+
+        <!-- AU 3P Onsite Channels -->
+        <div class="card">
+          <h4>AU 3P Onsite Channels</h4>
+          <ul>
+            <li><strong>#techpantry_square_dispatch_request</strong> — Tech Pantry dispatch requests</li>
+            <li><strong>#techpantry_square_onsite_help</strong> — Tech Pantry onsite support</li>
+            <li><strong>#oneworldrental_au_square_dispatch</strong> — One World Rental dispatch</li>
+            <li><strong>#oneworldrental_au_square_onsite-help</strong> — One World Rental onsite support</li>
+          </ul>
+        </div>
+
+        <!-- GSO Specific Channels -->
+        <div class="card">
+          <h4>GSO Specific Channels</h4>
+          <ul>
+            <li><strong>#prof-serv-private</strong> — Private GSO team channel</li>
+            <li><strong>#growth-professional-services</strong> — Broader professional services team</li>
+            <li><strong>#gps-deal-strategy</strong> — Deal strategy discussions</li>
+            <li><strong>#gps-restaurants-audience</strong> — Restaurants vertical audience</li>
+            <li><strong>#gps-retail-audience</strong> — Retail vertical audience</li>
+            <li><strong>#gps-services-audience</strong> — Services vertical audience</li>
+            <li><strong>#gso-bpo</strong> — BPO partner coordination</li>
+            <li><strong>#itsupport</strong> — IT support requests and help</li>
+          </ul>
+        </div>
+
+        <!-- Key Partner Channels -->
+        <div class="card">
+          <h4>Key Partner Specific Channels</h4>
+          <div class="channel-tags">
+            <span class="channel-tag">#deliverect-square</span>
+            <span class="channel-tag">#doshii-square</span>
+            <span class="channel-tag">#bigcommerce-square</span>
+            <span class="channel-tag">#grayza-square</span>
+            <span class="channel-tag">#partner-eng</span>
+            <span class="channel-tag">#skuiq-square</span>
+            <span class="channel-tag">#restokexsquare</span>
+            <span class="channel-tag">#square-mr-yum</span>
+            <span class="channel-tag">#woo-square-external</span>
+            <span class="channel-tag">#xero-square</span>
+          </div>
+        </div>
+
+        <!-- ── Recurring Meetings ─────────────────────────────────────────── -->
+        <div id="w1-meetings" class="block-label">Recurring GSO Meetings</div>
+
+        <div class="card">
+          <ul>
+            <li><strong>GSO All Hands</strong> — Quarterly</li>
+            <li><strong>APAC Weekly</strong> — Bi-weekly Fridays, 10:00–10:45am AEDT <span style="color:var(--sq-muted);font-size:13px;">(Kamilla will invite)</span></li>
+            <li><strong>APAC Stand-ups</strong> — Every Monday 9:00–9:20am <span style="color:var(--sq-muted);font-size:13px;">(Kamilla will invite)</span></li>
+          </ul>
+        </div>
+
+        <!-- ── Meet Your Team ─────────────────────────────────────────────── -->
+        <div id="w1-team" class="block-label">GSO — Meet Your Team</div>
+
+        <div class="callout green">
+          <span class="callout-icon">📅</span>
+          <span>Schedule 30-minute intro 1:1s with each team member during your first two weeks. Ask them about their role, their favourite part of the job, and one tip for a new starter.</span>
+        </div>
+
+        <!-- Australia -->
+        <div class="card" style="margin-bottom:12px;">
+          <h4>Australia</h4>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:10px;">
+
+            <!-- Kamilla -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:#0a0a0a;">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">KS</div>
+              <div style="flex:1;">
+                <div style="font-size:13.5px;font-weight:700;color:white;">Kamilla Schou Warr</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.5);">Melbourne</div>
+              </div>
+              <span style="font-size:11px;font-weight:700;color:var(--sq-green);background:rgba(0,204,101,0.15);padding:3px 10px;border-radius:99px;">👑 Team Lead</span>
+            </div>
+
+            <!-- Kristian -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-green-lt);border:1.5px solid #b3edce;">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">KB</div>
+              <div style="flex:1;">
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Kristian Bojsen-Moller</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Melbourne</div>
+              </div>
+              <span style="font-size:11px;font-weight:700;color:var(--sq-green-d);background:white;border:1px solid #b3edce;padding:3px 10px;border-radius:99px;">⭐ Your Sidekick</span>
+            </div>
+
+            <!-- Macarena -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">MC</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Macarena Castillo</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Melbourne</div>
+              </div>
+            </div>
+
+            <!-- Chandreyee -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">CB</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Chandreyee Bose</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Melbourne</div>
+              </div>
+            </div>
+
+            <!-- Josh -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">JS</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Josh Stoffels</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Melbourne</div>
+              </div>
+            </div>
+
+            <!-- Ben -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">BB</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Ben Braun</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Sydney</div>
+              </div>
+            </div>
+
+            <!-- Jamahl -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">JA</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Jamahl</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Canberra</div>
+              </div>
+            </div>
+
+            <!-- Meri -->
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:var(--sq-green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#0a0a0a;flex-shrink:0;">MF</div>
+              <div style="flex:1;">
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Meri Fakraufon</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Brisbane</div>
+              </div>
+              <span style="font-size:11px;font-weight:600;color:var(--sq-muted);background:var(--sq-bg);border:1px solid var(--sq-border);padding:3px 10px;border-radius:99px;">Vendor Manager</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Japan -->
+        <div class="card">
+          <h4>Japan 🇯🇵</h4>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:10px;">
+
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:#0a0a0a;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;">TK</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Takao Kinjo</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Tokyo</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:#0a0a0a;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;">MA</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">Misho Arai</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Tokyo</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--sq-bg);">
+              <div style="width:34px;height:34px;border-radius:50%;background:#0a0a0a;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;">MH</div>
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--sq-black);">maryh@squareup.com</div>
+                <div style="font-size:12px;color:var(--sq-muted);">Tokyo</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ── GSO Tooling ────────────────────────────────────────────────── -->
+        <div id="w1-tooling" class="block-label">GSO Tooling</div>
+
+        <div class="callout blue">
+          <span class="callout-icon">ℹ️</span>
+          <span>This section covers the fundamental tools, platforms, and systems every new team member must set up in Week 1. These are critical for communication, scheduling, documentation, and daily operations.</span>
+        </div>
+
+        <!-- 1. Chrome Extensions -->
+        <div class="tool-card">
+          <div class="tool-card-head">
+            <div class="tool-icon" style="background:#fff3e0;">🌐</div>
+            <h4>Chrome Extensions</h4>
+          </div>
+          <div class="tool-card-body">
+            <ul>
+              <li><strong>ChiliPiper</strong> — Booking tool for all seller-facing meetings. Install the Chrome extension for quick access to your booking links.</li>
+              <li><strong>Text Blaze</strong> — Snippet tool for templating common responses, emails, and Salesforce notes. Saves significant time on repetitive comms.</li>
+              <li><strong>Highspot</strong> — Sales enablement platform. The extension lets you share approved content directly from your browser.</li>
+              <li><strong>go/links</strong> — Internal URL shortener. Install the extension so go/ links resolve automatically in Chrome without needing to be on VPN.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. Registry Roles -->
+        <div class="tool-card">
+          <div class="tool-card-head">
+            <div class="tool-icon" style="background:#e8f5e9;">🔑</div>
+            <h4>Registry Roles</h4>
+            <a href="http://go/registry" target="_blank" class="tool-go">go/registry ↗</a>
+          </div>
+          <div class="tool-card-body">
+            <p>Registry manages system access and role-based permissions across Square. You'll need to request the correct roles to access the tools and data required for your role.</p>
+            <p style="margin-top:10px;">Request the following roles in Registry:</p>
+            <ul>
+              <li><strong>Professional Services Team</strong> — Grants access to GSO-specific Salesforce views, dashboards, and queue management tools.</li>
+              <li><strong>Team Business - Australia</strong> — Provides access to AU market data, reporting, and business-level account information.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. ChiliPiper -->
+        <div class="tool-card">
+          <div class="tool-card-head">
+            <div class="tool-icon" style="background:#fce4ec;">🌶️</div>
+            <h4>ChiliPiper</h4>
+          </div>
+          <div class="tool-card-body">
+            <p>ChiliPiper is the booking tool for all seller-facing meetings. Every kickoff call, follow-up, and seller appointment must be booked through ChiliPiper to ensure proper tracking and attribution.</p>
+            <ul>
+              <li>Book <strong>30-minute kickoff calls</strong> with a <strong>30-minute buffer</strong> after each session to complete notes and Salesforce updates.</li>
+              <li>Book follow-up appointments <strong>during the kickoff call</strong> using ChiliPiper — don't let sellers leave without a next step booked.</li>
+              <li>Sync your ChiliPiper booking link with your <strong>Google Calendar</strong> to keep availability accurate at all times.</li>
+            </ul>
+            <div class="chip-row">
+              <a href="#" class="chip">⚙️ ChiliPiper Account Setup</a>
+              <a href="#" class="chip">🎓 ChiliPiper Training (Live)</a>
+              <a href="#" class="chip">📖 ChiliPiper Training (Self-Guided)</a>
+            </div>
+            <div class="callout yellow" style="margin-top:14px;margin-bottom:0;">
+              <span class="callout-icon">⚠️</span>
+              <span>For ChiliPiper setup support, work with <strong>Macarena Castillo</strong>. Required to be in use by 7 April 2025.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Salesforce -->
+        <div class="tool-card">
+          <div class="tool-card-head">
+            <div class="tool-icon" style="background:#e3f2fd;">☁️</div>
+            <h4>Salesforce</h4>
+            <a href="http://go/salesforce" target="_blank" class="tool-go">go/salesforce ↗</a>
+          </div>
+          <div class="tool-card-body">
+            <p>Salesforce is the CRM used by the Revenue team to manage seller accounts, opportunities, and deal support requests. All GSO activity is logged and tracked here.</p>
+            <p style="margin-top:10px;"><strong>Account hierarchy:</strong></p>
+            <ul>
+              <li><strong>Parent Account</strong> → <strong>Account</strong> → <strong>Opportunity</strong> → <strong>Deal Support Request</strong></li>
+            </ul>
+            <p style="margin-top:10px;"><strong>If you don't have access:</strong></p>
+            <ul>
+              <li>Submit an IT support ticket requesting Salesforce access for your role.</li>
+              <li>Allow up to 24 hours for access to be provisioned and processed.</li>
+              <li>Verify your access at <a href="http://go/salesforce" target="_blank">go/salesforce</a> once you receive confirmation.</li>
+              <li>If access hasn't arrived after 24 hours, follow up directly with IT via <strong>#itsupport</strong> on Slack.</li>
+            </ul>
+            <div class="callout green" style="margin-top:14px;margin-bottom:0;">
+              <span class="callout-icon">✅</span>
+              <span>Before taking escalations, you'll need to create filters to manage your queue. Let <strong>Kamilla Schou Warr</strong> know when you're ready.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Calendars & PTO Management -->
+        <div class="tool-card">
+          <div class="tool-card-head">
+            <div class="tool-icon" style="background:#f3e5f5;">📅</div>
+            <h4>Calendars &amp; PTO Management</h4>
+          </div>
+          <div class="tool-card-body">
+            <p>All leave must be submitted via <strong>Workday</strong>. Follow the notice guidelines below to ensure cover can be arranged and the team is informed.</p>
+            <ul>
+              <li>Submit PTO at least <strong>1 week in advance</strong> for absences of 3 days or fewer.</li>
+              <li>Submit PTO at least <strong>2 weeks in advance</strong> for absences of 4 or more days.</li>
+              <li>Block your Google Calendar as <strong>"Out of Office"</strong> for the duration of your leave so your availability is visible to the team.</li>
+              <li>Two days before your PTO starts, coordinate handover with <strong>Kamilla</strong> using the PTO template at go/gsopto.</li>
+            </ul>
+            <div class="chip-row">
+              <a href="#" class="chip">📋 go/gsopto (PTO Template)</a>
+              <a href="#" class="chip">📅 AU GSO PTO Calendar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Regulator -->
+        <div class="tool-card">
+          <div class="tool-card-head">
+            <div class="tool-icon" style="background:#e8f5e9;">🛡️</div>
+            <h4>Regulator</h4>
+            <a href="http://go/regulator" target="_blank" class="tool-go">go/regulator ↗</a>
+          </div>
+          <div class="tool-card-body">
+            <p>Regulator is Square's internal platform for account access and administration. It allows the GSO team to view and manage seller account details, permissions, and configurations that are not visible in Salesforce.</p>
+            <p style="margin-top:10px;">Visit <a href="http://go/regulatoraccess" target="_blank">go/regulatoraccess</a> for step-by-step guidance on requesting the correct access level for your role.</p>
+            <div class="chip-row">
+              <a href="http://go/regulator" target="_blank" class="chip green">🛡️ go/regulator</a>
+              <a href="http://go/regulatoraccess" target="_blank" class="chip green">📋 go/regulatoraccess</a>
+            </div>
+          </div>
+        </div>
+
+      </section><!-- /#week1 -->
+      <section id="week2"    class="week-section w2"></section>
+      <section id="week3"    class="week-section w3"></section>
+      <section id="week4"    class="week-section w4"></section>
+      <section id="week6"    class="week-section w6"></section>
+
+    </main><!-- /.main -->
+
+  </div><!-- /.layout -->
+
+  <!-- ── Top Bar ──────────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <a class="sq-logo" href="#">
+      <div class="sq-logo-mark">
+        <!-- Square grid icon -->
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3"    y="3"    width="8.5" height="8.5" rx="1.5" fill="#0a0a0a"/>
+          <rect x="12.5" y="3"    width="8.5" height="8.5" rx="1.5" fill="#0a0a0a"/>
+          <rect x="3"    y="12.5" width="8.5" height="8.5" rx="1.5" fill="#0a0a0a"/>
+          <rect x="12.5" y="12.5" width="8.5" height="8.5" rx="1.5" fill="#0a0a0a"/>
+        </svg>
+      </div>
+      <span class="topbar-wordmark">Square</span>
+    </a>
+
+    <div class="topbar-divider"></div>
+    <span class="topbar-sub">GSO Onboarding Guide</span>
+
+    <div class="topbar-right">
+      <span id="progress-label">0 of 57 complete</span>
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+  </header>
+
+</body>
+</html>
