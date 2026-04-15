@@ -557,6 +557,65 @@
       font-weight: 500;
     }
 
+    /* ── Checkpoint Rows ────────────────────────────────────────────────────── */
+    .checkpoint-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .checkpoint-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      background: var(--sq-bg);
+      border: 1.5px solid var(--sq-border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .checkpoint-row:hover { border-color: var(--sq-green); background: var(--sq-green-lt); }
+    .checkpoint-row.done {
+      background: var(--sq-green-lt);
+      border-color: #b3edce;
+    }
+    .checkpoint-row.done .cp-text {
+      color: var(--sq-green-d);
+      text-decoration: line-through;
+      text-decoration-color: #b3edce;
+    }
+    .cp-box {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 2px solid var(--sq-border);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .checkpoint-row.done .cp-box {
+      background: var(--sq-green);
+      border-color: var(--sq-green);
+    }
+    .cp-tick {
+      display: none;
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .checkpoint-row.done .cp-tick { display: block; }
+    .cp-text {
+      font-size: 13.5px;
+      color: var(--sq-dark);
+      line-height: 1.4;
+      flex: 1;
+    }
+
     /* ── Dashboard List ─────────────────────────────────────────────────────── */
     .dashboard-list {
       display: flex;
@@ -1382,6 +1441,27 @@
           </div>
         </div>
 
+        <!-- Week 1 Checkpoint -->
+        <div id="week1-checkpoint" class="block-label">✓ Week 1 Checkpoint</div>
+        <div class="callout green">
+          <span class="callout-icon">✅</span>
+          <span>Click each item below to mark it complete. Your progress is saved automatically in your browser.</span>
+        </div>
+        <div class="card">
+          <div class="checkpoint-list">
+            <div class="checkpoint-row" data-id="w1-c1"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Laptop set up and all required systems accessible</span></div>
+            <div class="checkpoint-row" data-id="w1-c2"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Joined all required Slack channels</span></div>
+            <div class="checkpoint-row" data-id="w1-c3"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Read the Welcome, Comms &amp; Metrics sections of the GSO Playbook</span></div>
+            <div class="checkpoint-row" data-id="w1-c4"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Introduced yourself to the full APAC GSO team</span></div>
+            <div class="checkpoint-row" data-id="w1-c5"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Scheduled 1:1 intro meetings with all AU team members</span></div>
+            <div class="checkpoint-row" data-id="w1-c6"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Registry roles requested: Professional Services Team &amp; Team Business - Australia</span></div>
+            <div class="checkpoint-row" data-id="w1-c7"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Salesforce access confirmed at go/salesforce</span></div>
+            <div class="checkpoint-row" data-id="w1-c8"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Chrome extensions installed: ChiliPiper, Text Blaze, Highspot, go/links</span></div>
+            <div class="checkpoint-row" data-id="w1-c9"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Regulator access requested via go/regulatoraccess</span></div>
+            <div class="checkpoint-row" data-id="w1-c10"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">GSO Playbook bookmarked (go/gsoplaybook)</span></div>
+          </div>
+        </div>
+
       </section><!-- /#week1 -->
       <!-- ══════════════════════════════════════════════════════════════════ -->
       <!-- WEEK 2                                                           -->
@@ -1523,17 +1603,17 @@
         <div id="week2-checkpoint" class="block-label">✓ Week 2 Checkpoint</div>
         <div class="callout green">
           <span class="callout-icon">✅</span>
-          <span>Before moving to Week 3, make sure you've completed the following:</span>
+          <span>Click each item below to mark it complete. Your progress is saved automatically in your browser.</span>
         </div>
         <div class="card">
-          <ul>
-            <li>Introduced yourself to your assigned SAMP(s) on Slack</li>
-            <li>Joined all relevant partner Slack channels</li>
-            <li>Read the Partner Relationships section of the GSO Playbook</li>
-            <li>Familiarised yourself with Tech Pantry and One World Rental dispatch processes</li>
-            <li>Reviewed the 3P partner list and know which channels to use for each</li>
-            <li>Completed at least one shadowing session with Kristian on a live seller call</li>
-          </ul>
+          <div class="checkpoint-list">
+            <div class="checkpoint-row" data-id="w2-c1"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Introduced yourself to your assigned SAMP(s) on Slack</span></div>
+            <div class="checkpoint-row" data-id="w2-c2"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Joined all relevant partner Slack channels</span></div>
+            <div class="checkpoint-row" data-id="w2-c3"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Read the Partner Relationships section of the GSO Playbook</span></div>
+            <div class="checkpoint-row" data-id="w2-c4"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Familiarised yourself with Tech Pantry and One World Rental dispatch processes</span></div>
+            <div class="checkpoint-row" data-id="w2-c5"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Reviewed the 3P partner list and know which channels to use for each</span></div>
+            <div class="checkpoint-row" data-id="w2-c6"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Completed at least one shadowing session with Kristian on a live seller call</span></div>
+          </div>
         </div>
 
       </section><!-- /#week2 -->
@@ -1622,15 +1702,19 @@
 
         <!-- Week 3 Checkpoint -->
         <div id="week3-checkpoint" class="block-label">✓ Week 3 Checkpoint</div>
+        <div class="callout green">
+          <span class="callout-icon">✅</span>
+          <span>Click each item below to mark it complete. Your progress is saved automatically in your browser.</span>
+        </div>
         <div class="card">
-          <ul>
-            <li>Completed all 5 Bootcamp days</li>
-            <li>Run at least 2 solo kickoff calls (with Kristian as backup)</li>
-            <li>Salesforce filters set up and queue visible</li>
-            <li>ChiliPiper fully configured and synced with Google Calendar</li>
-            <li>At least 5 Text Blaze snippets created and tested</li>
-            <li>Week 3 review 1:1 completed with Kamilla</li>
-          </ul>
+          <div class="checkpoint-list">
+            <div class="checkpoint-row" data-id="w3-c1"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Completed all 5 Bootcamp days</span></div>
+            <div class="checkpoint-row" data-id="w3-c2"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Run at least 2 solo kickoff calls (with Kristian as backup)</span></div>
+            <div class="checkpoint-row" data-id="w3-c3"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Salesforce filters set up and queue visible</span></div>
+            <div class="checkpoint-row" data-id="w3-c4"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">ChiliPiper fully configured and synced with Google Calendar</span></div>
+            <div class="checkpoint-row" data-id="w3-c5"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">At least 5 Text Blaze snippets created and tested</span></div>
+            <div class="checkpoint-row" data-id="w3-c6"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Week 3 review 1:1 completed with Kamilla</span></div>
+          </div>
         </div>
 
       </section><!-- /#week3 -->
@@ -1819,15 +1903,19 @@
 
         <!-- Week 4 Checkpoint -->
         <div id="week4-checkpoint" class="block-label">✓ Week 4/5 Checkpoint</div>
+        <div class="callout green">
+          <span class="callout-icon">✅</span>
+          <span>Click each item below to mark it complete. Your progress is saved automatically in your browser.</span>
+        </div>
         <div class="card">
-          <ul>
-            <li>Completed Highspot training modules for all 4 core verticals</li>
-            <li>Can confidently explain the difference between Square for Restaurants, Retail, and Appointments</li>
-            <li>Know the top 3 features sellers care about in each vertical</li>
-            <li>Understand which 3P integrations are most common per vertical</li>
-            <li>Running solo kickoff calls independently (no backup needed)</li>
-            <li>Product knowledge review 1:1 completed with Kamilla</li>
-          </ul>
+          <div class="checkpoint-list">
+            <div class="checkpoint-row" data-id="w4-c1"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Completed Highspot training modules for all 4 core verticals</span></div>
+            <div class="checkpoint-row" data-id="w4-c2"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Can confidently explain the difference between Square for Restaurants, Retail, and Appointments</span></div>
+            <div class="checkpoint-row" data-id="w4-c3"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Know the top 3 features sellers care about in each vertical</span></div>
+            <div class="checkpoint-row" data-id="w4-c4"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Understand which 3P integrations are most common per vertical</span></div>
+            <div class="checkpoint-row" data-id="w4-c5"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Running solo kickoff calls independently (no backup needed)</span></div>
+            <div class="checkpoint-row" data-id="w4-c6"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Product knowledge review 1:1 completed with Kamilla</span></div>
+          </div>
         </div>
 
       </section><!-- /#week4 -->
@@ -1922,15 +2010,19 @@
 
         <!-- Week 6 Checkpoint -->
         <div id="week6-checkpoint" class="block-label">✓ Weeks 6–10 Checkpoint</div>
+        <div class="callout green">
+          <span class="callout-icon">✅</span>
+          <span>Click each item below to mark it complete. Your progress is saved automatically in your browser.</span>
+        </div>
         <div class="card">
-          <ul>
-            <li>Completed first Premium DSR end-to-end independently</li>
-            <li>Salesforce handoff note reviewed and approved by Kamilla</li>
-            <li>Comfortable running multi-session onboarding (3+ sessions)</li>
-            <li>Have a working relationship with at least 2 SAMPs</li>
-            <li>Know when and how to escalate to Kamilla vs. handle independently</li>
-            <li>90-day check-in 1:1 completed with Kamilla</li>
-          </ul>
+          <div class="checkpoint-list">
+            <div class="checkpoint-row" data-id="w6-c1"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Completed first Premium DSR end-to-end independently</span></div>
+            <div class="checkpoint-row" data-id="w6-c2"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Salesforce handoff note reviewed and approved by Kamilla</span></div>
+            <div class="checkpoint-row" data-id="w6-c3"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Comfortable running multi-session onboarding (3+ sessions)</span></div>
+            <div class="checkpoint-row" data-id="w6-c4"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Have a working relationship with at least 2 SAMPs</span></div>
+            <div class="checkpoint-row" data-id="w6-c5"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">Know when and how to escalate to Kamilla vs. handle independently</span></div>
+            <div class="checkpoint-row" data-id="w6-c6"><div class="cp-box"><span class="cp-tick">✓</span></div><span class="cp-text">90-day check-in 1:1 completed with Kamilla</span></div>
+          </div>
         </div>
 
       </section><!-- /#week6 -->
@@ -1941,36 +2033,101 @@
 
   <script>
     // ── Panel / Tab Switcher ─────────────────────────────────────────────────
-    // Maps panel ID → { tab selector, sidebar group data-for }
     const PANEL_MAP = {
-      overview: { tabSel: '.weekbar-tab.t0',  sidebarFor: 'overview' },
-      week1:    { tabSel: '.weekbar-tab.t1',  sidebarFor: 'week1'    },
-      week2:    { tabSel: '.weekbar-tab.t2',  sidebarFor: 'week2'    },
-      week3:    { tabSel: '.weekbar-tab.t3',  sidebarFor: 'week3'    },
-      week4:    { tabSel: '.weekbar-tab.t4',  sidebarFor: 'week4'    },
-      week6:    { tabSel: '.weekbar-tab.t6',  sidebarFor: 'week6'    },
+      overview: { tabSel: '.weekbar-tab.t0', sidebarFor: 'overview' },
+      week1:    { tabSel: '.weekbar-tab.t1', sidebarFor: 'week1'    },
+      week2:    { tabSel: '.weekbar-tab.t2', sidebarFor: 'week2'    },
+      week3:    { tabSel: '.weekbar-tab.t3', sidebarFor: 'week3'    },
+      week4:    { tabSel: '.weekbar-tab.t4', sidebarFor: 'week4'    },
+      week6:    { tabSel: '.weekbar-tab.t6', sidebarFor: 'week6'    },
     };
 
+    // Which checkpoint IDs belong to each week tab
+    const WEEK_CHECKPOINTS = {
+      week1: ['w1-c1','w1-c2','w1-c3','w1-c4','w1-c5','w1-c6','w1-c7','w1-c8','w1-c9','w1-c10'],
+      week2: ['w2-c1','w2-c2','w2-c3','w2-c4','w2-c5','w2-c6'],
+      week3: ['w3-c1','w3-c2','w3-c3','w3-c4','w3-c5','w3-c6'],
+      week4: ['w4-c1','w4-c2','w4-c3','w4-c4','w4-c5','w4-c6'],
+      week6: ['w6-c1','w6-c2','w6-c3','w6-c4','w6-c5','w6-c6'],
+    };
+
+    // Total checkpoints across all weeks
+    const TOTAL = Object.values(WEEK_CHECKPOINTS).flat().length;
+
+    // ── localStorage helpers ─────────────────────────────────────────────────
+    function getDone() {
+      return new Set(JSON.parse(localStorage.getItem('gso-done') || '[]'));
+    }
+    function saveDone(set) {
+      localStorage.setItem('gso-done', JSON.stringify([...set]));
+    }
+
+    // ── Render all checkpoint rows from saved state ──────────────────────────
+    function renderCheckpoints() {
+      const done = getDone();
+      document.querySelectorAll('.checkpoint-row').forEach(row => {
+        if (done.has(row.dataset.id)) {
+          row.classList.add('done');
+        } else {
+          row.classList.remove('done');
+        }
+      });
+    }
+
+    // ── Update topbar progress bar & label ───────────────────────────────────
+    function updateProgress() {
+      const done = getDone();
+      const count = done.size;
+      const pct = Math.round((count / TOTAL) * 100);
+      document.getElementById('progress-label').textContent = `${count} of ${TOTAL} complete`;
+      document.querySelector('.progress-fill').style.width = pct + '%';
+      updateWeekDoneTabs(done);
+    }
+
+    // ── Mark week tab as done (green tick) if all its checkpoints are ticked ──
+    function updateWeekDoneTabs(done) {
+      Object.entries(WEEK_CHECKPOINTS).forEach(([weekId, ids]) => {
+        const allDone = ids.every(id => done.has(id));
+        const tab = document.querySelector(`.weekbar-tab[data-week="${weekId.replace('week','')}"]`);
+        if (tab) tab.classList.toggle('week-done', allDone);
+      });
+    }
+
+    // ── Wire up checkpoint row clicks ────────────────────────────────────────
+    function bindCheckpoints() {
+      document.querySelectorAll('.checkpoint-row').forEach(row => {
+        row.addEventListener('click', () => {
+          const done = getDone();
+          const id = row.dataset.id;
+          if (done.has(id)) {
+            done.delete(id);
+          } else {
+            done.add(id);
+          }
+          saveDone(done);
+          renderCheckpoints();
+          updateProgress();
+        });
+      });
+    }
+
+    // ── Panel switcher ───────────────────────────────────────────────────────
     function activatePanel(panelId) {
       const cfg = PANEL_MAP[panelId];
       if (!cfg) return;
 
-      // 1. Hide all sections, show target
       document.querySelectorAll('.week-section').forEach(s => s.classList.remove('panel-active'));
       const target = document.getElementById(panelId);
       if (target) target.classList.add('panel-active');
 
-      // 2. Deactivate all tabs, activate matching tab
       document.querySelectorAll('.weekbar-tab').forEach(t => t.classList.remove('active'));
       const tab = document.querySelector(cfg.tabSel);
       if (tab) tab.classList.add('active');
 
-      // 3. Hide all sidebar groups, show matching group
       document.querySelectorAll('.sb-group').forEach(g => g.classList.remove('group-active'));
       const group = document.querySelector(`.sb-group[data-for="${cfg.sidebarFor}"]`);
       if (group) group.classList.add('group-active');
 
-      // 4. Scroll main content back to top
       const main = document.querySelector('.main');
       if (main) main.scrollTop = 0;
     }
@@ -1980,53 +2137,28 @@
       tab.addEventListener('click', e => {
         e.preventDefault();
         const week = tab.dataset.week;
-        if (week) {
-          activatePanel('week' + week);
-        } else {
-          // Overview tab (no data-week)
-          activatePanel('overview');
-        }
+        activatePanel(week ? 'week' + week : 'overview');
       });
     });
 
-    // ── Wire up sidebar sub-link clicks (smooth scroll within panel) ─────────
+    // ── Wire up sidebar sub-link clicks ─────────────────────────────────────
     document.querySelectorAll('.sidebar-sub-link').forEach(link => {
       link.addEventListener('click', e => {
         const href = link.getAttribute('href');
-        // Only intercept internal anchor links
         if (href && href.startsWith('#')) {
           e.preventDefault();
           const target = document.getElementById(href.slice(1));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-          // Update active sidebar link
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           document.querySelectorAll('.sidebar-sub-link').forEach(l => l.classList.remove('active'));
           link.classList.add('active');
         }
       });
     });
 
-    // ── Progress tracking (localStorage) ────────────────────────────────────
-    const TOTAL = 57;
-
-    function updateProgress() {
-      const done = JSON.parse(localStorage.getItem('gso-done') || '[]');
-      const count = done.length;
-      const pct = Math.round((count / TOTAL) * 100);
-      document.getElementById('progress-label').textContent = `${count} of ${TOTAL} complete`;
-      document.querySelector('.progress-fill').style.width = pct + '%';
-
-      // Mark week tabs as done if all their checkpoints are ticked
-      checkWeekDone();
-    }
-
-    function checkWeekDone() {
-      // For now just a placeholder — will activate when checkpoint rows are added
-    }
-
-    // Initialise progress on load
+    // ── Init ─────────────────────────────────────────────────────────────────
+    renderCheckpoints();
     updateProgress();
+    bindCheckpoints();
   </script>
 </body>
 </html>
