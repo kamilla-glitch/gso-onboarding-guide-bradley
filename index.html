@@ -1395,5 +1395,94 @@
     </div>
   </header>
 
+  <script>
+    // ── Panel / Tab Switcher ─────────────────────────────────────────────────
+    // Maps panel ID → { tab selector, sidebar group data-for }
+    const PANEL_MAP = {
+      overview: { tabSel: '.weekbar-tab.t0',  sidebarFor: 'overview' },
+      week1:    { tabSel: '.weekbar-tab.t1',  sidebarFor: 'week1'    },
+      week2:    { tabSel: '.weekbar-tab.t2',  sidebarFor: 'week2'    },
+      week3:    { tabSel: '.weekbar-tab.t3',  sidebarFor: 'week3'    },
+      week4:    { tabSel: '.weekbar-tab.t4',  sidebarFor: 'week4'    },
+      week6:    { tabSel: '.weekbar-tab.t6',  sidebarFor: 'week6'    },
+    };
+
+    function activatePanel(panelId) {
+      const cfg = PANEL_MAP[panelId];
+      if (!cfg) return;
+
+      // 1. Hide all sections, show target
+      document.querySelectorAll('.week-section').forEach(s => s.classList.remove('panel-active'));
+      const target = document.getElementById(panelId);
+      if (target) target.classList.add('panel-active');
+
+      // 2. Deactivate all tabs, activate matching tab
+      document.querySelectorAll('.weekbar-tab').forEach(t => t.classList.remove('active'));
+      const tab = document.querySelector(cfg.tabSel);
+      if (tab) tab.classList.add('active');
+
+      // 3. Hide all sidebar groups, show matching group
+      document.querySelectorAll('.sb-group').forEach(g => g.classList.remove('group-active'));
+      const group = document.querySelector(`.sb-group[data-for="${cfg.sidebarFor}"]`);
+      if (group) group.classList.add('group-active');
+
+      // 4. Scroll main content back to top
+      const main = document.querySelector('.main');
+      if (main) main.scrollTop = 0;
+    }
+
+    // ── Wire up week tab bar clicks ──────────────────────────────────────────
+    document.querySelectorAll('.weekbar-tab').forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.preventDefault();
+        const week = tab.dataset.week;
+        if (week) {
+          activatePanel('week' + week);
+        } else {
+          // Overview tab (no data-week)
+          activatePanel('overview');
+        }
+      });
+    });
+
+    // ── Wire up sidebar sub-link clicks (smooth scroll within panel) ─────────
+    document.querySelectorAll('.sidebar-sub-link').forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        // Only intercept internal anchor links
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.getElementById(href.slice(1));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          // Update active sidebar link
+          document.querySelectorAll('.sidebar-sub-link').forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // ── Progress tracking (localStorage) ────────────────────────────────────
+    const TOTAL = 57;
+
+    function updateProgress() {
+      const done = JSON.parse(localStorage.getItem('gso-done') || '[]');
+      const count = done.length;
+      const pct = Math.round((count / TOTAL) * 100);
+      document.getElementById('progress-label').textContent = `${count} of ${TOTAL} complete`;
+      document.querySelector('.progress-fill').style.width = pct + '%';
+
+      // Mark week tabs as done if all their checkpoints are ticked
+      checkWeekDone();
+    }
+
+    function checkWeekDone() {
+      // For now just a placeholder — will activate when checkpoint rows are added
+    }
+
+    // Initialise progress on load
+    updateProgress();
+  </script>
 </body>
 </html>
