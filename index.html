@@ -832,7 +832,7 @@
     <div class="topbar-divider"></div>
     <span class="topbar-sub">GSO Onboarding Guide</span>
     <div class="topbar-right">
-      <span id="progress-label">0 of 57 complete</span>
+      <span id="progress-label">0 of 34 complete</span>
       <div class="progress-track">
         <div class="progress-fill"></div>
       </div>
@@ -2051,8 +2051,8 @@
       week6: ['w6-c1','w6-c2','w6-c3','w6-c4','w6-c5','w6-c6'],
     };
 
-    // Total checkpoints across all weeks
-    const TOTAL = Object.values(WEEK_CHECKPOINTS).flat().length;
+    // Total checkpoints — computed dynamically from WEEK_CHECKPOINTS
+    const TOTAL = Object.values(WEEK_CHECKPOINTS).flat().length; // = 34
 
     // ── localStorage helpers ─────────────────────────────────────────────────
     function getDone() {
@@ -2130,6 +2130,9 @@
 
       const main = document.querySelector('.main');
       if (main) main.scrollTop = 0;
+
+      // Re-render checkpoints so ticks are always visible after tab switch
+      renderCheckpoints();
     }
 
     // ── Wire up week tab bar clicks ──────────────────────────────────────────
